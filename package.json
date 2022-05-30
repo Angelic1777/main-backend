@@ -4,6 +4,7 @@
   "description": "back-end project six",
   "main": "app.js",
   "scripts": {
+    "start": "nodemon app.js",
     "test": ",\"test\": \"echo \\\"Error: no test specified\\\" && exit 1\""
   },
   "repository": {
@@ -23,6 +24,7 @@
   "homepage": "https://github.com/Angelic1777/main-backend#readme",
   "dependencies": {
     "express": "^4.18.1",
+    "express-load": "^1.1.7",
     "nodemon": "^2.0.16"
   }
 }
