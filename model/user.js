@@ -1,21 +1,37 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
+const bcrypt = require('bcrypt')
+const Schema = mongoose.Schema
+
+const userSchema = new Schema({
+email: {
+   type: String,
+   required: true,
+   unique: true
+},
+password:  {
+    type: String,
+    required: true
+}
+})
+
+//static signup method
+userSchema.statics.signup = async function (email, password) {
+
+  const exists = await this.findOne({ email })
+
+   if (exists) {
+     throw Error('email already in use')
+   }
 
 
-const userSchema = mongoose.Schema({
-    
-        "data": {
-            "id": 2,
-            "email": "janet.weaver@reqres.in",
-            "first_name": "Janet",
-            "last_name": "Weaver",
-            "avatar": "https://reqres.in/img/faces/2-image.jpg"
-        },
-        "support": {
-            "url": "https://reqres.in/#support-heading",
-            "text": "To keep ReqRes free, contributions towards server costs are appreciated!"
-        }
-    }   
-});
+    const salt = await bcrypt.genSalt(10)
+    const hash = await bcrypt.hash(password, salt)
 
+    const user = await this.create({ email, password: hash })
 
-module.exports = mongoose.model('User', userSchema);
+     return user
+}
+
+module.exports = mongoose.model('User', userSchema)
+
+  
