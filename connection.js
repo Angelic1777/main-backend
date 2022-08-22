@@ -1,4 +1,4 @@
-const { MongoClient } = require('mongodb');
+onst { MongoClient } = require('mongodb');
 
 async function main() {
     /**
@@ -43,3 +43,4 @@ async function listDatabases(client) {
     console.log("Databases:");
     databasesList.databases.forEach(db => console.log(` - ${db.name}`));
 };
+
