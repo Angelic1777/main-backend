@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
-const port = 4200
+const port = 5501
 
-app.get('/', (req, res) => {
+app.get('/api/user', (req, res) => {
   res.send('We are home page')
 })
 
